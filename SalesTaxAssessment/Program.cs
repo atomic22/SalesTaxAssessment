@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Text.RegularExpressions;
+ 
 
 namespace SalesTaxAssessment
 {
@@ -11,35 +8,45 @@ namespace SalesTaxAssessment
     {
         static void Main(string[] args)
         {
-            List<object> carts = new List<object>();
-            List<Products> cart1 = new List<Products>();
+            List<object> AllCarts = new List<object>();
+            List<object> cart1 = new List<object>();
+            List<object> cart2 = new List<object>();
+            List<object> cart3 = new List<object>();
+
             Invoice items = new Invoice();
 
-            cart1.Add(new Products(1, "book", 12.49m, false, false));
-            cart1.Add(new Products(1, "music Cd", 14.99m, true, false));
-            cart1.Add(new Products(1, "chocolate bar", 0.85m, false, false));
+            //items collected
+            ShoppingCart ItemsInCart0 = new ShoppingCart(1, "nb", 12.49m, false, false);
+            ShoppingCart ItemsInCart1 = new ShoppingCart(1, "cd", 14.99m, true, false);
+            ShoppingCart ItemsInCart2 = new ShoppingCart(1, "cb", 0.85m, false, false);
 
-            carts.Add(cart1);
+            //items placed inside cart
+            cart1.Add(ItemsInCart0);
+            cart1.Add(ItemsInCart1);
+            cart1.Add(ItemsInCart2);
+
+            //add cart to collection of carts
+            AllCarts.Add(cart1);
 
 
-            foreach (var cart in carts)
+            //loop over each cart
+            foreach (var cart in AllCarts)
             {
-                foreach (var product in cart1)
+
+
+
+                if (ItemsInCart0.IsTaxable)
                 {
-                    if (product.IsTaxable)
-                    {
-                        product.SaleTax = product.GetTax(cart1);
-                        product.Price = product.Price + product.SaleTax;
-                    }
-
-                    if (product.IsImport)
-                    {
-                        product.SaleTax = product.ImportDutyTax(cart1);
-                        product.Price = product.Price + product.ImportationTax;
-                    }
-
-                    items.BuildInvoice(product);
+                    ItemsInCart0.SaleTax = ItemsInCart0.GetTax(cart);
+                    ItemsInCart0.Price = ItemsInCart0.Price + ItemsInCart0.SaleTax;
                 }
+                if (ItemsInCart0.IsImport)
+                {
+                    ItemsInCart0.SaleTax = ItemsInCart0.ImportDutyTax(cart);
+                    ItemsInCart0.Price = ItemsInCart0.Price + ItemsInCart0.ImportationTax;
+                }
+
+                items.BuildInvoice(ItemsInCart0);
             }
 
 

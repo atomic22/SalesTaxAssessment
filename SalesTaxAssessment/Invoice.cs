@@ -25,7 +25,7 @@ namespace SalesTaxAssessment
 
             foreach (var purchase in Purchases)
             {
-                sr.Append(purchase.Quantity + " " + purchase.Name + " " + Math.Round(purchase.Price, 2) + "\n");
+                sr.Append(purchase.Name + " " + Math.Round(purchase.Price, 2) + "\n");
                 SalesTaxTotal += purchase.SaleTax;
                 InvoiceTotal += purchase.Price;
             }
