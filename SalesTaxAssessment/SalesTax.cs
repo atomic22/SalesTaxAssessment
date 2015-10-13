@@ -1,14 +1,28 @@
-﻿namespace SalesTaxAssessment
+﻿using System;
+namespace SalesTaxAssessment
 {
 
     public abstract class SalesTax
     {
-        private static readonly decimal TaxRate = .1m;
-        private static readonly decimal ImportRate = .05m;
+        const decimal TaxRate = .1m;
+        const decimal ImportRate = .05m;
 
         public decimal Rate = TaxRate;
         public decimal ImportTax = ImportRate;
-        
+
+
+        private decimal roundTo;
+                
+        public decimal Round(decimal valToRound)
+        {
+            decimal remainder = Decimal.Remainder(valToRound, this.roundTo);
+            if (remainder < (this.roundTo / 2))
+                return valToRound - remainder;
+            else
+                return valToRound + (this.roundTo - remainder);
+        }
+
+
         //calculate the total tax
         public decimal CalculateTax(decimal price)
         {
