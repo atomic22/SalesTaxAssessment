@@ -1,19 +1,21 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace SalesTaxAssessment
 {
     public class ShoppingCart: Products
     {
         public int Quantity { get; set; }
+        List<Products> ProductsToBuy = new List<Products>();
 
-        public ShoppingCart(int quantity, string name, decimal price, bool isTaxable, bool isImport)
+        
+        public void AddItemsToCart(List<Products> productstobuy, int quantity)
         {
+            
+            ProductsToBuy = productstobuy;
             Quantity = quantity;
-            Name = name;
-            Price = price;
-            IsTaxable = isTaxable;
-            IsImport = isImport;
+
         }
+        
     }
 }
