@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesTaxAssessment
 {
-    public class Invoice : Products
+    public class Invoice
     {
         public List<Products> Purchases = new List<Products>();
         public StringBuilder sr = new StringBuilder();

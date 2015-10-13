@@ -11,7 +11,16 @@ namespace SalesTaxAssessment
         public bool IsTaxable { get; set; }
         public decimal SaleTax { get; set; }
         public decimal ImportationTax { get; set; }
-        
+
+        public Products(int quantity, string name, decimal price, bool isTaxable, bool isImport)
+        {
+            Quantity = quantity;
+            Name = name;
+            Price = price;
+            IsTaxable = isTaxable;
+            IsImport = isImport;
+        }
+
         public decimal GetTax(object product)
         {
             return CalculateTax(Price);
