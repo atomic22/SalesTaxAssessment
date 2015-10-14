@@ -8,6 +8,7 @@ namespace SalesTaxAssessment
     {
         static void Main(string[] args)
         {
+            //Create a new set of items for the invoice
             Invoice items = new Invoice();
 
             Products product = new Products("book", 12.49m, false, false);
