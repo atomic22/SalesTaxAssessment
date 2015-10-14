@@ -19,6 +19,7 @@ namespace SalesTaxAssessment
             items.AddItemsToCart(product2, 1);
 
             Console.WriteLine("Order 1:");
+            Console.WriteLine("--------------");
             Console.WriteLine(items.DisplayInovicedItems());
             ///////////////////////////////////////////////////////////////
             
@@ -30,21 +31,23 @@ namespace SalesTaxAssessment
             items.AddItemsToCart(product4, 1);
             
             Console.WriteLine("Order 2:");
+            Console.WriteLine("--------------");
             Console.WriteLine(items.DisplayInovicedItems());
             ////////////////////////////////////////////////////////////////////
 
             items = new Invoice();
             
-            Products product5 = new Products("Imported bottle of Perfume", 27.99m, false, false);
-            Products product6 = new Products("Bottle of Perfume", 18.99m, false, false);
+            Products product5 = new Products("Imported bottle of Perfume", 27.99m, true, true);
+            Products product6 = new Products("Bottle of Perfume", 18.99m, true, false);
             Products product7 = new Products("Packet of Headache Pills", 9.75m, false, false);
-            Products product8 = new Products("Imported Box of Chocolates", 11.25m, false, false);
+            Products product8 = new Products("Imported Box of Chocolates", 11.25m, false, true);
             items.AddItemsToCart(product5, 1);
             items.AddItemsToCart(product6, 1);
             items.AddItemsToCart(product7, 1);
             items.AddItemsToCart(product8, 1);
 
             Console.WriteLine("Order 3:");
+            Console.WriteLine("--------------");
             Console.WriteLine(items.DisplayInovicedItems());
             /////////////////////////////////////////////////////////////////
 

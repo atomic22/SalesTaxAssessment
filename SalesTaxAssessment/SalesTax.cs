@@ -11,29 +11,21 @@ namespace SalesTaxAssessment
         public decimal ImportTax = ImportRate;
 
 
-        private decimal roundTo;
-                
-        public decimal Round(decimal valToRound)
-        {
-            decimal remainder = Decimal.Remainder(valToRound, this.roundTo);
-            if (remainder < (this.roundTo / 2))
-                return valToRound - remainder;
-            else
-                return valToRound + (this.roundTo - remainder);
-        }
-
 
         //calculate the total tax
         public decimal CalculateTax(decimal price)
         {
-
-            return price * this.Rate;
+            decimal st = price * Rate;
+            st = Math.Ceiling(st * 20) / 20;
+            return st;
         }
 
         //calculate the import duty
                 public decimal CalculateImportDuty(decimal price)
         {
-            return price * this.ImportTax;
+            decimal id = price * ImportTax;
+            id = Math.Ceiling(id * 20) / 20;
+            return id;
         }
     }
 }

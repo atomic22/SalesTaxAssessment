@@ -12,7 +12,7 @@ namespace SalesTaxAssessment
 
         public decimal SaleTax { get; set; }
         public decimal ImportationTax { get; set; }
-
+        
         public Products(string name, decimal price, bool isTaxable, bool isImport)
         {
             this.Name = name;

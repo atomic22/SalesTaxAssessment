@@ -14,12 +14,15 @@ namespace SalesTaxAssessment
         public StringBuilder sr = new StringBuilder();
         public decimal SalesTaxTotal;
         public decimal InvoiceTotal;
+        public decimal InvoicedSalesTax;
+        public decimal InvoicedImportDuty;
 
         public Invoice() { }
 
 
         public void AddItemsToCart(Products item, int quantity)
         {
+            Quantity = quantity;
             this._items.Add(item);
 
         }
@@ -31,27 +34,29 @@ namespace SalesTaxAssessment
 
             foreach (var purchase in _items)
             {
+                InvoicedSalesTax = 0m;
+                InvoicedImportDuty = 0m;
                 if (purchase.IsTaxable)
                 {
-                    purchase.SaleTax = CalculateTax(purchase.Price);
-
+                    InvoicedSalesTax = CalculateTax(purchase.Price);
                 }
 
                 if (purchase.IsImport)
                 {
-                    purchase.ImportTax = CalculateImportDuty(purchase.Price);
+                    InvoicedImportDuty = CalculateImportDuty(purchase.Price);
                 }
 
-                purchase.Price = purchase.Price + purchase.SaleTax;
-                purchase.Price = purchase.Price + purchase.ImportTax;
+                purchase.Price = purchase.Price + InvoicedSalesTax;
+                purchase.Price = purchase.Price + InvoicedImportDuty;
 
-                sr.Append(purchase.Name + " " + Math.Round(purchase.Price, 2) + "\n");
+                sr.AppendLine(Quantity + " " + purchase.Name + " " + Math.Round(purchase.Price, 2));
 
-                SalesTaxTotal += purchase.SaleTax + purchase.ImportTax;
+                SalesTaxTotal += InvoicedSalesTax + InvoicedImportDuty;
                 InvoiceTotal += purchase.Price;
             }
-            sr.Append("Sales Tax: " + Math.Round(SalesTaxTotal, 2) + "\n");
-            sr.Append("Total: " + Math.Round(InvoiceTotal, 2) + "\n");
+            sr.AppendFormat("Sales Tax : {0:N}", SalesTaxTotal);
+            sr.AppendLine();
+            sr.AppendLine("Total : " + Math.Round(InvoiceTotal, 2));
 
             return sr.ToString();
         }
